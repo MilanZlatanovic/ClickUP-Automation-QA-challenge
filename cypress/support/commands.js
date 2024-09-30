@@ -77,9 +77,7 @@ Cypress.Commands.add('login', () => {
       }
     }
 
-    //cy.RemoveParamFromJsonBody
-
-
+  
     cy.APIPost(apiUrl, requestBody);
    
   })
@@ -90,6 +88,33 @@ Cypress.Commands.add('login', () => {
 
     var requestBody = {
         name:folderName
+    }
+
+    cy.APIPost(apiUrl, requestBody);
+   
+  })
+
+  Cypress.Commands.add('APIPostList',(folderId,listName) => {
+    
+    const apiUrl = `https://api.clickup.com/api/v2/folder/${folderId}/list`
+
+    
+    
+
+    var requestBody = {
+        name:listName
+    }
+
+    cy.APIPost(apiUrl, requestBody);
+   
+  })
+
+  Cypress.Commands.add('APIPostTask',(listId,taskName) => {
+    
+    const apiUrl = `https://api.clickup.com/api/v2/list/${listId}/task`
+
+    var requestBody = {
+        name:taskName
     }
 
     cy.APIPost(apiUrl, requestBody);
@@ -120,7 +145,53 @@ Cypress.Commands.add('ValidateSpaceName',(name)=> {
 })
 })
 
+Cypress.Commands.add('ClickSpaceByName', (name) => {
+  const spaceName = name
+  cy.contains('[data-test^="project-row__name__"]', name).click();
+});
 
+Cypress.Commands.add('ValidateFolderName',(name)=> {
 
+  const folderName = name
+  cy.contains('[data-test^="category-row__folder-name__"]', name)  
+  .should('exist') 
+  .invoke('text') 
+  .then((text) => {
+    expect(text.trim()).to.equal(folderName)
+
+})
+})
+Cypress.Commands.add('ClickFolderByName', (name) => {
+  const folderName = name
+  cy.contains('[data-test^="category-row__folder-name__"]', name).click();
+});
+
+Cypress.Commands.add('ValidateListName',(name)=> {
+
+  const listName = name
+  cy.contains('[data-test^="subcategory-row__"]', name)  
+  .should('exist') 
+  .invoke('text') 
+  .then((text) => {
+    expect(text.trim()).to.equal(listName)
+
+})
+})
+Cypress.Commands.add('ClickListByName', (name) => {
+  const listName = name
+  cy.contains('[data-test^="subcategory-row__"]', name).click();
+});
+
+Cypress.Commands.add('ValidateTaskName',(name)=> {
+
+  const taskName = name
+  cy.contains('[data-test^="task-row-main__link-text__"]', name)  
+  .should('exist') 
+  .invoke('text') 
+  .then((text) => {
+    expect(text.trim()).to.equal(taskName)
+
+})
+})
 
 
