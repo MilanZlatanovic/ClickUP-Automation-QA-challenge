@@ -31,3 +31,23 @@ Cypress.Commands.add('APIPost', (apiUrlPart, requestBody) => {
       }
     });
   });
+
+
+Cypress.Commands.add('APIGet', (apiUrlPart, queryParameters) => {
+  const apiKey = testdata.userdata.apikey;
+  const url = `${testdata.userdata.baseApiUrl}/${apiUrlPart}`;
+  if(queryParameters){
+    const query = new URLSearchParams(queryParameters).toString();
+    url=`${url}?${query}`;
+  }
+
+  cy.request({
+    method: 'GET',
+    url: url,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: apiKey,
+    },
+    
+  });
+});
