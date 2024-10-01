@@ -81,11 +81,6 @@ Cypress.Commands.add('APIVerifyTask', (name) =>{
   
   })
 
-
-Cypress.Commands.add('APIVerifyResponseInvalid', (response) => {
-  expect(response.status).to.eq(400) 
-})
-
 // // dodao
 // const { removeField } = require('../utils/objectUtils');
 

@@ -5,7 +5,7 @@ describe('Happy flow', () => {
     const spaceName = "imespejsa"
     
     cy.APIPostSpace(spaceName).then((response) => {
-      cy.APIVerifyResponseValid(response)
+      expect(response.status).to.eq(200) 
   })
   
     cy.login()

@@ -5,11 +5,11 @@ describe('Space Creation - Error Handling', () => {
     const spaceName = "imespejsa"
     
     cy.APIPostSpace(spaceName).then((response) => {
-      cy.APIVerifyResponseValid(response)
+      expect(response.status).to.eq(200) 
   })
 
   cy.APIPostSpace(spaceName).then((response) => {
-    cy.APIVerifyResponseInvalid(response)
+    expect(response.status).to.eq(400) 
 })
    
       
@@ -26,7 +26,7 @@ describe('Space Creation - Error Handling', () => {
       const spaceName = "Overthecharacterboundaryspacename" //33 characters
       
       cy.APIPostSpace(spaceName).then((response) => {
-        cy.APIVerifyResponseInvalid(response)
+        expect(response.status).to.eq(400) 
     })
       
       
