@@ -2,10 +2,10 @@ describe('Happy flow', () => {
 
     it('Validates creation of task', () => {
 
-        const folderName = "imefoldera"
-        const spaceName = "imespejsa"
-        const listName = 'imeliste'
-        const taskName ='imetaska'
+        const folderName = "folder"
+        const spaceName = "space"
+        const listName = 'list'
+        const taskName ='task'
 
         cy.APIPostSpace(spaceName)
       .its('body.id')
