@@ -1,19 +1,5 @@
 import testdata from '../fixtures/testdata.json'
 
-Cypress.Commands.add('APIPost', (apiUrl, requestBody) => {
-    const apiKey = testdata.userdata.apikey;
-  
-    cy.request({
-      method: 'POST',
-      url: apiUrl,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: apiKey,
-      },
-      body: requestBody,
-      failOnStatusCode: false
-    });
-  });
   
   Cypress.Commands.add('APIGet', (apiUrl, queryParameters) => {
     const apiKey = testdata.userdata.apikey;
@@ -37,36 +23,7 @@ Cypress.Commands.add('APIPost', (apiUrl, requestBody) => {
     cy.APIGet(apiUrl);
    
   })
-  Cypress.Commands.add('APIPostSpace',(spaceName) => {
-    const teamId = testdata.userdata.teamid 
-    const apiUrl = `https://api.clickup.com/api/v2/team/${teamId}/space`
-
-
-    var requestBody = {
-      name: spaceName,
-      multiple_assignees: true,
-      features: {
-        due_dates: {
-          enabled: true,
-          start_date: false,
-          remap_due_dates: true,
-          remap_closed_due_date: false
-        },
-        time_tracking: { enabled: false },
-        tags: { enabled: true },
-        time_estimates: { enabled: true },
-        checklists: { enabled: true },
-        custom_fields: { enabled: true },
-        remap_dependencies: { enabled: true },
-        dependency_warning: { enabled: true },
-        portfolios: { enabled: true }
-      }
-    }
-
-  
-    cy.APIPost(apiUrl, requestBody);
-   
-  })
+ 
 
   Cypress.Commands.add('APIPostFolder',(spaceId,folderName) => {
     
@@ -107,12 +64,6 @@ Cypress.Commands.add('APIPost', (apiUrl, requestBody) => {
    
   })
 
-  Cypress.Commands.add('APIVerifyResponseValid',(response) => {
-
-  
-    expect(response.status).to.eq(200) 
-    cy.log(JSON.stringify(response.body)) 
-})
 
 Cypress.Commands.add('APIVerifyTask', (name) =>{
 
@@ -122,7 +73,7 @@ Cypress.Commands.add('APIVerifyTask', (name) =>{
     .then((taskId) => {
         const taskID = taskId;
         cy.APIGetTask(taskId).then(respond => {
-            cy.APIVerifyResponseValid(respond);
+          expect(response.status).to.eq(200) 
         })
     })
   
