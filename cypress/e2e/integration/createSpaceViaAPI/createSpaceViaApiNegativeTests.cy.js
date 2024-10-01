@@ -6,31 +6,44 @@ describe('Space Creation - Error Handling', () => {
     
     cy.APIPostSpace(spaceName).then((response) => {
       expect(response.status).to.eq(200) 
-  })
+     })
 
   cy.APIPostSpace(spaceName).then((response) => {
     expect(response.status).to.eq(400) 
-})
-   
-      
     })
+   
+})
 
   
-  })
+
    
   //This test assumes that there is validation on the backend that matches the
   // one on the frontend. Since it is not possible to input Space name over 33 characters this
   //API request should return 400 bad response
     it('Validate Response Status for space name over the limit', () => {
-  
       const spaceName = "Overthecharacterboundaryspacename" //33 characters
-      
       cy.APIPostSpace(spaceName).then((response) => {
         expect(response.status).to.eq(400) 
     })
-      
-      
-      })
+  
+});
+
+
+it(`Validate Response Status 400 when name is missing`, () => {
+  cy.IncompliteRequestSpacePost('name')
+});
+
+it(`Validate Response Status 400 when multiple_assignees is missing`, () => {
+  cy.IncompliteRequestSpacePost('multiple_assignees')
+});
+
+it(`Validate Response Status 400 when features.due_dates.enabled is missing`, () => {
+  cy.IncompliteRequestSpacePost('features.due_dates.enabled')
+ });
+
+    
+  
+})
   
   
       
