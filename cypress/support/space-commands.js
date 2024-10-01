@@ -1,10 +1,11 @@
 
 import testdata from '../fixtures/testdata.json';
 
+import {removeField} from '../utils/objectUtils';
+
 Cypress.Commands.add('APIPostSpace', (spaceName) => {
     const teamId = testdata.userdata.teamid
     const apiUrl = `team/${teamId}/space`
-
 
     var requestBody = {
         name: spaceName,
@@ -27,9 +28,7 @@ Cypress.Commands.add('APIPostSpace', (spaceName) => {
         }
     }
 
-
     cy.APIPost(apiUrl, requestBody);
-
 })
 
 Cypress.Commands.add('APIDeleteSpace', (spaceId) => {
