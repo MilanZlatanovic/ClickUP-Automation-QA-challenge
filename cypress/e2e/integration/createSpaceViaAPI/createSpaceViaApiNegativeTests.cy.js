@@ -1,22 +1,40 @@
 describe('Space Creation - Error Handling', () => {
+
+  it('Verify response for creating two spaces with the same name', () => {
+
+    const spaceName = "imespejsa"
+    
+    cy.APIPostSpace(spaceName).then((response) => {
+      cy.APIVerifyResponseValid(response)
+  })
+
+  cy.APIPostSpace(spaceName).then((response) => {
+    cy.APIVerifyResponseInvalid(response)
+})
    
-    it('Validate Response Status', () => {
+      
+    })
+
+  
+  })
+   
+  //This test assumes that there is validation on the backend that matches the
+  // one on the frontend. Since it is not possible to input Space name over 33 characters this
+  //API request should return 400 bad response
+    it('Validate Response Status for space name over the limit', () => {
   
       const spaceName = "Overthecharacterboundaryspacename" //33 characters
       
       cy.APIPostSpace(spaceName).then((response) => {
         cy.APIVerifyResponseInvalid(response)
     })
-    
-    //   cy.login()
-    //   cy.wait(50000)
-      //cy.ValidateSpaceName(spaceName)
-        
+      
+      
       })
   
   
       
-    })
+    
 
 
 
