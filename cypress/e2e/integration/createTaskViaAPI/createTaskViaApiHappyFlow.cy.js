@@ -2,7 +2,7 @@ describe('Happy flow', () => {
 
     it('Validates creation of task', () => {
 
-        const folderName = "folder"
+        const folderName = "folder" //ideally this would be also moved to fixtures
         const spaceName = "space"
         const listName = 'list'
         const taskName ='task'

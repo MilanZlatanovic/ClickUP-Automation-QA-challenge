@@ -22,8 +22,6 @@ Cypress.Commands.add('APIVerifyTask', (name) => {
         .invoke('text')
         .then((taskId) => {
             const taskID = taskId;
-            cy.APIGetTask(taskId).then(respond => {
-                expect(respond.status).to.eq(200)
-            })
+            cy.APIGetTask(taskId);
         })
 })

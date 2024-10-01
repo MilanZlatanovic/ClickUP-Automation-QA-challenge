@@ -11,8 +11,9 @@ describe('Happy flow', () => {
         cy.wait(50000)
         cy.ClickSpaceByName(spaceName)
         cy.CreateTaskFromList(taskName)
-        cy.APIVerifyTask(taskName)
-        
+        cy.APIVerifyTask(taskName).then(respond => {
+            expect(respond.status).to.eq(200)
+        })   
     })
 
    
