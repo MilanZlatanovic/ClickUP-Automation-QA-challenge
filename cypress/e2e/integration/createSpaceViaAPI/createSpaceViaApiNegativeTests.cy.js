@@ -2,7 +2,7 @@ describe('Space Creation - Error Handling', () => {
 
   it('Verify response for creating two spaces with the same name', () => {
 
-    const spaceName = "imespejsa"
+    const spaceName = "random"
     
     cy.APIPostSpace(spaceName).then((response) => {
       expect(response.status).to.eq(200) 

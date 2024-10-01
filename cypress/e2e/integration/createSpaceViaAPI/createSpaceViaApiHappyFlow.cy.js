@@ -2,7 +2,7 @@ describe('Happy flow', () => {
    
   it('Validate Response Status', () => {
 
-    const spaceName = "imespejsa"
+    const spaceName = "random"
     
     cy.APIPostSpace(spaceName).then((response) => {
       expect(response.status).to.eq(200) 
