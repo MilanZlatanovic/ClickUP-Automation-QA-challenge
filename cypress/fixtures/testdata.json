@@ -1,9 +1,9 @@
 {
     "userdata": {
-    "email": "milanzlatanovic92@gmail.com",
-    "password": "Passzaclickup!",
-    "teamid": "9012315377",
-    "apikey": "pk_2142602213_E3GLJPAV9O550NM1EHHZRP7EUPFNAQNW"
+        "email": "milanzlatanovic92@gmail.com",
+        "password": "Passzaclickup!",
+        "teamid": "9012315377",
+        "apikey": "pk_2142602213_E3GLJPAV9O550NM1EHHZRP7EUPFNAQNW",
+        "baseApiUrl": "https://api.clickup.com/api/v2"
     }
 }
-  
