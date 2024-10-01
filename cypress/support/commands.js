@@ -1,7 +1,5 @@
 
 import testdata from '../fixtures/testdata.json'
-import './apiCommands'
-
 
 
 
@@ -12,14 +10,6 @@ Cypress.Commands.add('login', () => {
   cy.get('[data-test="login-submit"]').click();
 
 });
-
-
-
-
-Cypress.Commands.add('RemoveParamFromJsonBody', (paramName, JsonBody) => {
-  JsonBody.remove(paramName)
-  return JsonBody
-})
 
 Cypress.Commands.add('ValidateSpaceName', (name) => {
 
@@ -48,7 +38,6 @@ Cypress.Commands.add('ValidateFolderName', (name) => {
     })
 })
 Cypress.Commands.add('ClickFolderByName', (name) => {
-  const folderName = name
   cy.contains('[data-test^="category-row__folder-name__"]', name).click();
 })
 
@@ -64,7 +53,6 @@ Cypress.Commands.add('ValidateListName', (name) => {
     })
 })
 Cypress.Commands.add('ClickListByName', (name) => {
-
   cy.contains('[data-test^="subcategory-row__"]', name).click();
 });
 
@@ -81,9 +69,7 @@ Cypress.Commands.add('ValidateTaskName', (name) => {
 })
 
 Cypress.Commands.add('ClickTaskByName', (name) => {
-  const taskName = name
   cy.contains('[data-test^="task-row-main__link-text__"]', name).click();
-
 });
 
 Cypress.Commands.add('CreateNewSpaceFromLandingPage', (name) => {
