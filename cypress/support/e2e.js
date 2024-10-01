@@ -17,6 +17,9 @@
 import './commands'
 import './rest-commands';
 import './space-commands';
+import './folder-commands';
+import './list-commands';
+import './task-commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
