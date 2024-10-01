@@ -10,7 +10,8 @@ Cypress.Commands.add('APIPost', (apiUrl, requestBody) => {
         'Content-Type': 'application/json',
         Authorization: apiKey,
       },
-      body: requestBody
+      body: requestBody,
+      failOnStatusCode: false
     });
   });
   
@@ -131,5 +132,45 @@ Cypress.Commands.add('APIVerifyTask', (name) =>{
 
 
 Cypress.Commands.add('APIVerifyResponseInvalid', (response) => {
-  expect(response.status).to.eq(400)
+  expect(response.status).to.eq(400) 
 })
+
+// // dodao
+// const { removeField } = require('../utils/objectUtils');
+
+
+
+
+// //dodao
+// Cypress.Commands.add('APISendIncompliteRequestSpacePost', (fieldToRemove) => {
+
+//   const requestBody = {
+//     name: 'imespejsa',
+//     multiple_assignees: true,
+//     features: {
+//       due_dates: {
+//         enabled: true,
+//         start_date: false,
+//         remap_due_dates: true,
+//         remap_closed_due_date: false
+//       },
+//       time_tracking: { enabled: false },
+//       tags: { enabled: true },
+//       time_estimates: { enabled: true },
+//       checklists: { enabled: true },
+//       custom_fields: { enabled: true },
+//       remap_dependencies: { enabled: true },
+//       dependency_warning: { enabled: true },
+//       portfolios: { enabled: true }
+//     }
+//   };
+
+//   const requestCopy = JSON.parse(JSON.stringify(requestBody));
+//   removeField(requestCopy, fieldToRemove);
+//   cy.APIPostSpace(requestCopy).then((response) => {
+//     cy.APIVerifyResponseInvalid(response);
+//   });
+
+// })
+
+
