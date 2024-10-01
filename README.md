@@ -1,4 +1,4 @@
-Lodgify Junior Automation QA Challenge
+ClickUP app-Automation-QA-challenge
 
 Overview
 This repository contains my solution for the Lodgify Junior Automation QA Challenge.
