@@ -8,6 +8,7 @@ To get started you should:
 2. Install dependecies
 
 !!!IMPORTANT!!!
+
 3. Change the fixture file
 In order to run tests with your own account you will need to change the testdata.js file in the fixtures folder. 
 It looks like this:
