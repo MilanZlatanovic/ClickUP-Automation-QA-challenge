@@ -1,44 +1,6 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
 import testdata from '../fixtures/testdata.json'
-
-
-Cypress.Commands.add('APIPost', (apiUrl, requestBody) => {
-  const apiKey = testdata.userdata.apikey;
-
-  cy.request({
-    method: 'POST',
-    url: apiUrl,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: apiKey,
-    },
-    body: requestBody
-  });
-});
+import './apiCommands'
 
 
 
@@ -51,82 +13,8 @@ Cypress.Commands.add('login', () => {
    
   });
 
-  Cypress.Commands.add('APIPostSpace',(spaceName) => {
-    const teamId = testdata.userdata.teamid 
-    const apiUrl = `https://api.clickup.com/api/v2/team/${teamId}/space`
 
-
-    var requestBody = {
-      name: spaceName,
-      multiple_assignees: true,
-      features: {
-        due_dates: {
-          enabled: true,
-          start_date: false,
-          remap_due_dates: true,
-          remap_closed_due_date: false
-        },
-        time_tracking: { enabled: false },
-        tags: { enabled: true },
-        time_estimates: { enabled: true },
-        checklists: { enabled: true },
-        custom_fields: { enabled: true },
-        remap_dependencies: { enabled: true },
-        dependency_warning: { enabled: true },
-        portfolios: { enabled: true }
-      }
-    }
-
-  
-    cy.APIPost(apiUrl, requestBody);
-   
-  })
-
-  Cypress.Commands.add('APIPostFolder',(spaceId,folderName) => {
-    
-    const apiUrl = `https://api.clickup.com/api/v2/space/${spaceId}/folder`
-
-    var requestBody = {
-        name:folderName
-    }
-
-    cy.APIPost(apiUrl, requestBody);
-   
-  })
-
-  Cypress.Commands.add('APIPostList',(folderId,listName) => {
-    
-    const apiUrl = `https://api.clickup.com/api/v2/folder/${folderId}/list`
-
-    
-    
-
-    var requestBody = {
-        name:listName
-    }
-
-    cy.APIPost(apiUrl, requestBody);
-   
-  })
-
-  Cypress.Commands.add('APIPostTask',(listId,taskName) => {
-    
-    const apiUrl = `https://api.clickup.com/api/v2/list/${listId}/task`
-
-    var requestBody = {
-        name:taskName
-    }
-
-    cy.APIPost(apiUrl, requestBody);
-   
-  })
-
-  Cypress.Commands.add('APIVerifyResponseValid',(response) => {
-
-  
-    expect(response.status).to.eq(200) 
-    cy.log(JSON.stringify(response.body)) 
-})
+ 
 
 Cypress.Commands.add('RemoveParamFromJsonBody', (paramName, JsonBody) => {
   JsonBody.remove(paramName)
@@ -146,8 +34,7 @@ Cypress.Commands.add('ValidateSpaceName',(name)=> {
 })
 
 Cypress.Commands.add('ClickSpaceByName', (name) => {
-  const spaceName = name
-  cy.contains('[data-test^="project-row__name__"]', name).click();
+   cy.contains('[data-test^="project-row__name__"]', name).click();
 });
 
 Cypress.Commands.add('ValidateFolderName',(name)=> {
@@ -178,7 +65,7 @@ Cypress.Commands.add('ValidateListName',(name)=> {
 })
 })
 Cypress.Commands.add('ClickListByName', (name) => {
-  const listName = name
+  
   cy.contains('[data-test^="subcategory-row__"]', name).click();
 });
 
@@ -193,5 +80,77 @@ Cypress.Commands.add('ValidateTaskName',(name)=> {
 
 })
 })
+
+Cypress.Commands.add('ClickTaskByName', (name) => {
+  const taskName = name
+  cy.contains('[data-test^="task-row-main__link-text__"]', name).click();
+
+});
+
+Cypress.Commands.add('CreateNewSpaceFromLandingPage', (name) => {
+
+  cy.get('[data-test="all-projects-row__text"]').click()
+  cy.contains('button.button', 'New Space').click();
+  cy.get('[data-test="create-space-details__input"]').first().type(name)
+  cy.get('[data-test="create-space-details__continue-button"]').click()
+  cy.get('[data-test="create-test-workflow__create-space-button"]').click()
+
+})
+
+Cypress.Commands.add('CreateTaskFromList', (name) => {
+
+  cy.get('[data-test="create-task-menu__new-task-button"][buttontype="primary"]').last().should('be.visible').click()
+  cy.get('[data-test="draft-view__title-task"]').should('be.visible')
+  .and('not.be.disabled').focus().wait(2000).type(name, { delay: 200 })
+  cy.get('[data-test="draft-view__quick-create-create"]').click()
+})
+
+Cypress.Commands.add('CreateTaskFromListNoName', () => {
+
+  cy.get('[data-test="create-task-menu__new-task-button"][buttontype="primary"]').last().should('be.visible').click()
+  cy.get('[data-test="draft-view__title-task"]').should('be.visible')
+  .and('not.be.disabled').focus().wait(2000).clear()
+  cy.get('[data-test="draft-view__quick-create-create"]').click()
+})
+
+
+
+// // dodao
+// const { removeField } = require('../utils/objectUtils');
+
+
+
+
+// //dodao 
+// Cypress.Commands.add('APISendIncompliteRequestSpacePost', (fieldToRemove) => {
+
+//   const requestBody = {
+//     name: 'imespejsa',
+//     multiple_assignees: true,
+//     features: {
+//       due_dates: {
+//         enabled: true,
+//         start_date: false,
+//         remap_due_dates: true,
+//         remap_closed_due_date: false
+//       },
+//       time_tracking: { enabled: false },
+//       tags: { enabled: true },
+//       time_estimates: { enabled: true },
+//       checklists: { enabled: true },
+//       custom_fields: { enabled: true },
+//       remap_dependencies: { enabled: true },
+//       dependency_warning: { enabled: true },
+//       portfolios: { enabled: true }
+//     }
+//   };
+
+//   const requestCopy = JSON.parse(JSON.stringify(requestBody));
+//   removeField(requestCopy, fieldToRemove);
+//   cy.APIPostSpace(requestCopy).then((response) => {
+//     cy.APIVerifyResponseInvalid(response);
+//   });
+
+// })
 
 
